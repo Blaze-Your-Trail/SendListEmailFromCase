@@ -68,7 +68,7 @@ public with sharing class SendMassEmailController{
             if(emailtemplate!=Null)
             {
              et=[Select id,name,subject,body,folder.name from EmailTemplate where id=:emailtemplate]; 
-             lstOwea = [SELECT Id, Address FROM OrgWideEmailAddress];
+             lstOwea = [SELECT Id, Address FROM OrgWideEmailAddress where Address =:System.Label.OrgWideEmailID];
              oweId = lstOwea[0].Id;
             }     
 
@@ -92,7 +92,7 @@ public with sharing class SendMassEmailController{
                     mail.setSaveAsActivity(true);
                     mail.setTemplateId(et.id);
                     mail.setWhatId(c.Id);
-                  mail.setOrgWideEmailAddressId(oweId);
+           mail.setOrgWideEmailAddressId(oweId);       
                     emaillist.add(mail);
                     }
                  }
